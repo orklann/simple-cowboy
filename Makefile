@@ -6,6 +6,7 @@ DEPS = cowboy
 dep_cowboy_commit = master
 DEP_PLUGINS = cowboy
 
+PROJECT_APP_EXTRA_KEYS = {included_applications, ['mnesia']}
 DEPS += erlydtl
 
 include erlang.mk

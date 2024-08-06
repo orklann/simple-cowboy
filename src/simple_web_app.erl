@@ -11,6 +11,7 @@ get_temaplate_path(File) ->
     filename:join(TemplatePath, File).
 
 start(_Type, _Args) ->
+    mnesia:start(),
     Dispatch = cowboy_router:compile([
         {'_', [{"/", hello_handler, []}]}
     ]),

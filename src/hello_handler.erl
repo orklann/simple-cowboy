@@ -4,7 +4,7 @@
 -export([init/2, terminate/3]).
 
 init(Req0, State) ->
-    TemplateFile = "/home/rkt/code/erl/simple_web/templates/index.html",
+    TemplateFile = simple_web_app:get_temaplate_path("index.html"),
     erlydtl:compile_file(TemplateFile, index), 
     {ok, Body} = index:render([
             {title, "Johnny"},

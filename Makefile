@@ -6,4 +6,6 @@ DEPS = cowboy
 dep_cowboy_commit = master
 DEP_PLUGINS = cowboy
 
+DEPS += erlydtl
+
 include erlang.mk

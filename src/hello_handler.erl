@@ -1,11 +1,17 @@
 -module(hello_handler).
 -behavior(cowboy_handler).
 
--export([init/2]).
+-export([init/2, terminate/3]).
 
 init(Req0, State) ->
-    Req = cowboy_req:reply(200,
-        #{<<"content-type">> => <<"text/plain">>},
-        <<"Hello Erlang!">>,
-        Req0),
-    {ok, Req, State}.
+    TemplateFile = "/home/rkt/code/erl/simple_web/templates/index.html",
+    erlydtl:compile_file(TemplateFile, index), 
+    {ok, Body} = index:render([
+            {title, "Johnny"},
+            {message, "I am a message"}
+        ]),
+    Req2 = cowboy_req:reply(200, #{<<"content-type">> => <<"text/html">>}, Body, Req0),
+    {ok, Req2, State}.
+
+terminate(_Reason, _Req, _State) ->
+    ok.
